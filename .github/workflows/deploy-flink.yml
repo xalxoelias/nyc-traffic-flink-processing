@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'job_1_high_congestion.py'
-      - 'job2_aggregation_enrichment.py'
+      - 'flink/job1_high_congestion.py'
+      - 'flink/job2_aggregation_enrichment.py'
       - 'requirements.txt' 
 
 
