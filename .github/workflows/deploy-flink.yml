@@ -1,0 +1,37 @@
+name: Deploy Flink Jobs to S3
+
+on:
+  push:
+    branches:
+      - main   # change if you use another branch
+    paths:
+      - 'job1_high_congestion.py'
+      - 'job2_aggregation_enrichment.py'
+      - 'requirements.txt'   # include if you have dependencies
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1   # change if using another region
+
+      # 3. Package Flink scripts into a zip
+      - name: Package Flink jobs
+        run: |
+          zip -r flink_code.zip job1_high_congestion.py job2_aggregation_enrichment.py requirements.txt
+
+      # 4. Upload zip to S3
+      - name: Upload Flink zip to S3
+        run: |
+          aws s3 cp flink_code.zip s3://apache-flink-data-processing/flink_code.zip
