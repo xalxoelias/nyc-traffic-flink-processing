@@ -25,7 +25,7 @@ jobs:
 
       # 3. Package Flink scripts into a zip
       - name: Package Flink jobs
-        run: zip -r flink_code.zip job1_high_congestion.py job2_aggregation_enrichment.py requirements.txt
+        run: zip -r flink_code.zip . #updating to zip all files in the repo
 
 
       # 4. Upload zip to S3
