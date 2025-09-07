@@ -30,12 +30,12 @@ jobs:
       # 3. Package JOb 1
       - name: Package Flink Job 1
         run: |
-          zip -j flink_job1.zip ./job1_high_congestion.py ./requirements.txt
+          zip -j flink_job1.zip ./flink/job1_high_congestion.py ./requirements.txt
 
       # 4. Package Job 2
       - name: Package Flink Job 2
         run: |
-          zip -r flink_job2.zip ./job2_aggregation_enrichment.py ./requirements.txt
+          zip -j flink_job2.zip ./flink/job2_aggregation_enrichment.py ./requirements.txt
 
       # 5. Upload Job 1 zip to S3
       - name: Upload Flink Job 1 to S3
