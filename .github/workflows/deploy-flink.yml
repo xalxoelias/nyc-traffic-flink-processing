@@ -3,11 +3,8 @@ name: Deploy Flink Jobs to S3
 on:
   push:
     branches:
-      - main   # change if you use another branch
-    paths:
-      - 'job1_high_congestion.py'
-      - 'job2_aggregation_enrichment.py'
-      - 'requirements.txt'   # include if you have dependencies
+      - "**"
+
 
 jobs:
   deploy:
@@ -33,4 +30,4 @@ jobs:
 
       # 4. Upload zip to S3
       - name: Upload Flink zip to S3
-        run: aws s3 cp flink_code.zip s3://apache-flink-data-processing/flink_code.zip
+        run: aws s3 cp flink_code.zip s3://apache-flink-data-processing/flink_code.zip --region us-east-1
